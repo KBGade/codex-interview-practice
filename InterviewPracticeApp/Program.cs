@@ -6,18 +6,24 @@ namespace InterviewPracticeApp;
 
 public static class Program
 {
-    public static void Main()
+   public static void Main()
+{
+    Console.WriteLine("Interview Practice App");
+    Console.WriteLine("----------------------");
+
+    int[] numbers = { 1, 2, 2, 3, 3, 3, 4, 5, 5 };
+    int top = 2;
+
+    if (top > numbers.Length)
     {
-        Console.WriteLine("Interview Practice App");
-        Console.WriteLine("----------------------");
-
-        int[] numbers = { 1, 2, 2, 3, 3, 3, 4, 5, 5 };
-        int top = 2;
-
-        var result = GetTopKFrequent(numbers, top);
-
-        Console.WriteLine($"Top {top} frequent elements: {string.Join(", ", result)}");
+        Console.WriteLine("Requested top K is larger than the number of elements.");
+        return;
     }
+
+    var result = GetTopKFrequent(numbers, top);
+
+    Console.WriteLine($"Top {top} frequent elements: {string.Join(", ", result)}");
+}
 
     public static List<int> GetTopKFrequent(int[] numbers, int k)
     {
