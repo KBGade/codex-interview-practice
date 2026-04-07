@@ -1,98 +1,169 @@
-# Interview Practice App
+# Codex Interview Practice
 
-A simple .NET console application created for interview preparation and Codex-based code review practice.
-
-## Purpose
-
-This repository is used to practice:
-- clean C# coding
-- Git branching and pull requests
-- Codex code review
-- algorithm and API interview exercises
-
-## Current Example
-
-The current implementation demonstrates:
-- frequency counting with `Dictionary<int, int>`
-- sorting with LINQ
-- returning top K frequent elements
-
-## Tech Stack
-
-- C#
-- .NET
-- VS Code
-- GitHub
-- OpenAI Codex
-
-## Run Locally
-
-```bash
-dotnet restore
-dotnet run
-
-Future Practice Ideas
-Subarray Sum Equals K
-Merge Intervals
-Number of Islands
-REST API with validation and error handling
-EF Core query optimization
-async/await correctness exercises
-Why this repo exists
-
-The goal is to simulate a real engineering workflow:
-
-write code
-commit changes
-open a PR
-get Codex review
-improve the code
-
-A clear README helps both humans and tools understand the project. OpenAI’s Codex docs recommend giving Codex clear repo context and persistent instructions; a good README plus `AGENTS.md` is a strong setup. :contentReference[oaicite:4]{index=4}
+A .NET interview practice repository used for coding exercises, API design, pull request workflows, and AI-assisted code review using Codex.
 
 ---
 
-# 6) Add `AGENTS.md` for Codex review behavior
+## 🚀 Current Project
 
-Create `AGENTS.md` in the repo root:
+Minimal ASP.NET Core Web API for Order Management.
 
-```md
-# AGENTS.md
+---
 
-## Purpose
-Guide Codex to review this repository like a strict senior .NET interviewer.
+## ✨ Features
 
-## Review guidelines
+- Create order
+- Get all orders
+- Get order by id
+- Delete order
+- Swagger (OpenAPI) integration
+- Service layer with validation
+- Clean minimal API design
 
-### Correctness
-- Flag null handling issues
-- Check boundary conditions and edge cases
-- Verify algorithm correctness
+---
 
-### Performance
-- Flag inefficient LINQ or repeated enumeration
-- Check whether time and space complexity can be improved
-- Flag unnecessary allocations where relevant
+## 🛠 Tech Stack
 
-### C# quality
-- Flag poor naming
-- Flag large methods that should be split
-- Prefer readable and maintainable code over clever code
+- C#
+- ASP.NET Core Web API
+- Swagger / OpenAPI
+- VS Code
+- Git & GitHub
+- Codex (AI-assisted code review)
 
-### Async and API readiness
-- Flag blocking calls such as `.Result` or `.Wait()`
-- Suggest `CancellationToken` where appropriate
-- Flag missing validation or weak error handling
+---
 
-### Security and logging
-- Flag secrets, tokens, and unsafe logging
-- Flag any sensitive data exposure
+## 📁 Project Structure
 
-### Testing
-- Suggest useful unit tests
-- Suggest negative and edge-case tests
+```
+src/
+  InterviewPracticeApi/
+tests/
+AGENTS.md
+README.md
+.gitignore
+codex-interview-practice.sln
+```
 
-## Output style
-- Group findings by severity
-- Keep comments concise
-- Suggest concrete fixes
+---
+
+## ▶️ Run Locally
+
+```bash
+dotnet restore
+dotnet run --project src/InterviewPracticeApi/InterviewPracticeApi.csproj
+```
+
+Then open Swagger:
+
+```
+https://localhost:xxxx/swagger
+```
+
+---
+
+## 📡 API Endpoints
+
+### GET /
+Health endpoint
+
+### GET /orders
+Returns all orders
+
+### GET /orders/{id}
+Returns order by id
+
+### POST /orders
+Creates a new order
+
+Example request:
+
+```json
+{
+  "customerName": "Kiran",
+  "productName": "Laptop",
+  "amount": 75000
+}
+```
+
+### DELETE /orders/{id}
+Deletes order by id
+
+---
+
+## 🤖 Codex Review Workflow
+
+This project demonstrates AI-assisted code review using Codex.
+
+### Workflow
+
+1. Create feature branch
+2. Implement changes
+3. Push code to GitHub
+4. Open Pull Request
+5. Run Codex review
+6. Apply improvements
+7. Re-run review
+
+---
+
+## 🔍 What Codex Reviews
+
+- Code quality
+- API design
+- Validation and error handling
+- HTTP status code correctness
+- Performance considerations
+- Interview-level improvements
+
+---
+
+## 🧪 Example Codex Prompts
+
+```
+Review this pull request for:
+- API design
+- validation gaps
+- status code correctness
+- code quality
+```
+
+```
+Act as a senior .NET backend engineer and review this PR.
+```
+
+---
+
+## 📸 API Demo
+
+![Swagger UI](docs/swagger-ui.png)
+
+## 📸 Codex Review Summary
+
+![Codex Review Summary](docs/codex-review-summary.png)
+
+## 📸 Detailed Review Output
+
+![Codex Review Details](docs/codex-review-details.png)
+
+---
+
+## 💡 Purpose
+
+This repository is designed to simulate a real engineering workflow:
+
+1. Write code
+2. Push changes
+3. Open Pull Request
+4. Review using Codex
+5. Improve code based on feedback
+
+---
+
+## 🎯 Why This Project Matters
+
+- Demonstrates real-world backend development
+- Shows clean API design practices
+- Highlights code review workflow
+- Integrates AI-assisted engineering (Codex)
+- Useful for senior .NET interview preparation
