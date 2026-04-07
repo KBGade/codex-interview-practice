@@ -1,20 +1,25 @@
+using System.Collections.Concurrent;
+using System.Threading;
 using InterviewPracticeApi.Models;
 
 namespace InterviewPracticeApi.Services;
 
 public class OrderService
 {
-    private static readonly List<Order> Orders = new();
-    private static int _nextId = 1;
+    private readonly ConcurrentDictionary<int, Order> _orders = new();
+    private int _nextId = 0;
 
-    public List<Order> GetAll()
+    public IReadOnlyList<Order> GetAll()
     {
-        return Orders;
+        return _orders.Values
+            .OrderBy(x => x.Id)
+            .ToList();
     }
 
     public Order? GetById(int id)
     {
-        return Orders.FirstOrDefault(x => x.Id == id);
+        _orders.TryGetValue(id, out var order);
+        return order;
     }
 
     public Order Create(Order order)
@@ -28,20 +33,25 @@ public class OrderService
         if (order.Amount <= 0)
             throw new ArgumentException("Amount must be greater than zero.");
 
-        order.Id = _nextId++;
-        order.CreatedAtUtc = DateTime.UtcNow;
+        var id = Interlocked.Increment(ref _nextId);
 
-        Orders.Add(order);
-        return order;
+        var newOrder = new Order
+        {
+            Id = id,
+            CustomerName = order.CustomerName,
+            ProductName = order.ProductName,
+            Amount = order.Amount,
+            CreatedAtUtc = DateTime.UtcNow
+        };
+
+        if (!_orders.TryAdd(newOrder.Id, newOrder))
+            throw new InvalidOperationException("Failed to add order.");
+
+        return newOrder;
     }
 
     public bool Delete(int id)
     {
-        var existing = Orders.FirstOrDefault(x => x.Id == id);
-        if (existing is null)
-            return false;
-
-        Orders.Remove(existing);
-        return true;
+        return _orders.TryRemove(id, out _);
     }
 }

@@ -48,6 +48,10 @@ app.MapPost("/orders", (Order order, OrderService orderService) =>
     {
         return Results.BadRequest(new { message = ex.Message });
     }
+    catch (InvalidOperationException ex)
+    {
+        return Results.Problem(ex.Message);
+    }
 });
 
 app.MapDelete("/orders/{id:int}", (int id, OrderService orderService) =>
